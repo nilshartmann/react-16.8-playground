@@ -1,15 +1,20 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import Editor from "./Editor";
 
-function Hello() {
-	return (
-		<>
-			<h1>Hello</h1>
-			<Editor defaultMessage="Hello" />
-		</>
-	);
-}
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+
+import HelloPage from "./HelloPage";
+import CiaoPage from "./CiaoPage";
+
+const App = () => (
+  <Router>
+    <Switch>
+      <Route path="/hello" component={HelloPage} />
+      <Route path="/ciao" component={CiaoPage} />
+      <Route render={() => <Redirect to="/hello" />} />
+    </Switch>
+  </Router>
+);
 
 const mountNode = document.getElementById("app");
-ReactDOM.render(<Hello />, mountNode);
+ReactDOM.render(<App />, mountNode);
